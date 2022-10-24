@@ -1,0 +1,179 @@
+<div class="container">
+  <section>
+    <form class="example-form" [formGroup]="Registration" (ngSubmit)="getFormValues(Registration.value)">
+      <p>
+        <mat-form-field class="example-full-width" appearance="standard">
+          <mat-label>CCMS Id</mat-label>
+          <input type="number" matInput placeholder="4587412" formControlName="IdCcms">
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Rol</mat-label>
+          <mat-select formControlName="IdRol">
+            <mat-option *ngFor="let lstRoles of listRoles; index as i" [value]="lstRoles.IdRol">{{lstRoles.RolName}}
+            </mat-option>
+          </mat-select>
+          <mat-hint>Rol o cargo en la empresa</mat-hint>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field class="example-full-width" appearance="standard">
+          <mat-label>Nombre</mat-label>
+          <input matInput placeholder="Tu nombre" formControlName="Nombre" autocomplete="off">
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field class="example-full-width" appearance="standard">
+          <mat-label>Cedula</mat-label>
+          <input type="number" matInput placeholder="Tu cedula" formControlName="Cedula" autocomplete="off">
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Ciudad</mat-label>
+          <mat-select formControlName="IdCiudad" (ngModelChange)="onSelectCity($event)">
+            <mat-option *ngFor="let lstCiudades of listCiudades; index as i" [value]="lstCiudades.IdCiudad">
+              {{lstCiudades.NombreCiudad}}</mat-option>
+          </mat-select>
+          <mat-hint>Tu ciudad de residencia</mat-hint>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Concurso</mat-label>
+          <mat-select formControlName="IdConcurso">
+            <mat-option matTooltip="{{lstConcursos.Dias <= 3 ? 'Inscripciones cerradas' : ''}}" matTooltipPosition="after" *ngFor="let lstConcursos of listConcursos; index as i" [value]="lstConcursos.IdConcurso"
+              [disabled]="lstConcursos.Dias <= 3">{{lstConcursos.NombreConcurso}}, {{lstConcursos.NombreCiudad}}
+              {{lstConcursos.FechaConcurso}}, Límite {{lstConcursos.LimiteParticipantes}}, Faltan {{lstConcursos.Dias}}
+              dias</mat-option>
+          </mat-select>
+          <mat-hint></mat-hint>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Sexo</mat-label>
+          <mat-select formControlName="IdSexo">
+            <mat-option *ngFor="let lstSexos of listSexos; index as i" [value]="lstSexos.IdSexo">{{lstSexos.NombreSexo}}
+            </mat-option>
+          </mat-select>
+          <mat-hint></mat-hint>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Fecha de Nacimiento</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="FechaNacimiento" autocomplete="off">
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </p>
+      <br>
+      <button [disabled]="Registration.invalid || Registration.value.IdRol == '1' || Registration.disabled" type="submit" mat-raised-button
+        color="primary">Guardar</button>
+      <mat-error class="validationMessage" *ngIf="Registration.value.IdRol == '1'">Concursos solo para asesores
+      </mat-error>
+    </form>
+  </section>
+  <section>
+    <mat-accordion>
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Ranking
+          </mat-panel-title>
+          <mat-panel-description>
+            Puntuación de anteriores concursos
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <table mat-table [dataSource]="rankings">
+
+          <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="Nombre">
+            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+            <td mat-cell *matCellDef="let element"> <small>{{element.Nombre}}</small> </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="IdCcms">
+            <th mat-header-cell *matHeaderCellDef> Ccms </th>
+            <td mat-cell *matCellDef="let element"> <small>{{element.IdCcms}}</small> </td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="Puntuacion">
+            <th mat-header-cell *matHeaderCellDef> Rank </th>
+            <td mat-cell *matCellDef="let element"> <small>{{element.Puntuacion}}</small> </td>
+          </ng-container>
+
+          <ng-container matColumnDef="NombreConcurso">
+            <th mat-header-cell *matHeaderCellDef> Concurso </th>
+            <td mat-cell *matCellDef="let element"> <small>{{element.NombreConcurso}}</small> </td>
+          </ng-container>
+
+          <ng-container matColumnDef="NombreActividad">
+            <th mat-header-cell *matHeaderCellDef> Actividad </th>
+            <td mat-cell *matCellDef="let element"> <small>{{element.NombreActividad}}</small> </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="rankingsColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: rankingsColumns;"></tr>
+        </table>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </section>
+  <section>
+    <mat-accordion>
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Incripciones
+          </mat-panel-title>
+          <mat-panel-description>
+            Todas las incripciones
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <table mat-table [dataSource]="dataContest">
+
+          <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="NombreConcurso">
+            <th mat-header-cell *matHeaderCellDef> Concurso </th>
+            <td mat-cell *matCellDef="let element"> <small>{{element.NombreConcurso}}</small> </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="FechaConcurso">
+            <th mat-header-cell *matHeaderCellDef> Fecha </th>
+            <td mat-cell *matCellDef="let element"> <small>{{element.FechaConcurso}}</small> </td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="Nombre">
+            <th mat-header-cell *matHeaderCellDef> Participante </th>
+            <td mat-cell *matCellDef="let element"> <small>{{element.Nombre}}</small> </td>
+          </ng-container>
+
+          <ng-container matColumnDef="IdCcms">
+            <th mat-header-cell *matHeaderCellDef> Ccms </th>
+            <td mat-cell *matCellDef="let element"> <small>{{element.IdCcms}}</small> </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="contestColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: contestColumns;"></tr>
+        </table>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </section>
+  <footer>
+    Developed with ❤️ by {{developer}}
+  </footer>
+</div>
