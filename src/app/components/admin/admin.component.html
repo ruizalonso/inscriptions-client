@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="head-container">
+    <p>Intentos de registro</p>
+  </div>
+  <section>
+    <table mat-table [dataSource]="logs">
+      <ng-container matColumnDef="Nombre">
+        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+        <td mat-cell *matCellDef="let element"> <small>{{element.Nombre}}</small> </td>
+      </ng-container>
+
+      <ng-container matColumnDef="IdCcms">
+        <th mat-header-cell *matHeaderCellDef> IdCcms </th>
+        <td mat-cell *matCellDef="let element"> <small>{{element.IdCcms}}</small> </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="FechaRegistro">
+        <th mat-header-cell *matHeaderCellDef> Fecha </th>
+        <td mat-cell *matCellDef="let element"> <small>{{element.FechaRegistro}}</small> </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="Descripcion">
+        <th mat-header-cell *matHeaderCellDef> Descripcion </th>
+        <td mat-cell *matCellDef="let element"> <small>{{element.Descripcion}}</small> </td>
+      </ng-container>
+
+      <ng-container matColumnDef="NombreConcurso">
+        <th mat-header-cell *matHeaderCellDef> Concurso </th>
+        <td mat-cell *matCellDef="let element"> <small>{{element.NombreConcurso}}</small> </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="logColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: logColumns;"></tr>
+    </table>
+  </section>
+  <div class="head-container">
+    <p>Todas las incripciones</p>
+  </div>
+  <section>
+    <table mat-table [dataSource]="concursos">
+
+      <ng-container matColumnDef="Nombre">
+        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+        <td mat-cell *matCellDef="let element"> <small>{{element.Nombre}}</small> </td>
+      </ng-container>
+
+      <ng-container matColumnDef="IdCcms">
+        <th mat-header-cell *matHeaderCellDef> Ccms </th>
+        <td mat-cell *matCellDef="let element"> <small>{{element.IdCcms}}</small> </td>
+      </ng-container>
+
+      <ng-container matColumnDef="FechaConcurso">
+        <th mat-header-cell *matHeaderCellDef> Fecha </th>
+        <td mat-cell *matCellDef="let element"> <small>{{element.FechaConcurso}}</small> </td>
+      </ng-container>
+
+      <ng-container matColumnDef="NombreConcurso">
+        <th mat-header-cell *matHeaderCellDef> Concurso </th>
+        <td mat-cell *matCellDef="let element"> <small>{{element.NombreConcurso}}</small> </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="concursosColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: concursosColumns;"></tr>
+    </table>
+  </section>
+  <footer>
+    Developed with ❤️ by {{developer}}
+  </footer>
+</div>

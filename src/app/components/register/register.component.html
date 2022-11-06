@@ -1,0 +1,87 @@
+<div class="container">
+  <section>
+    <form class="example-form" [formGroup]="Registration" (ngSubmit)="getFormValues(Registration.value)">
+      <p>
+        <mat-form-field class="example-full-width" appearance="standard">
+          <mat-label>CCMS Id</mat-label>
+          <input type="number" matInput placeholder="4587412" formControlName="IdCcms">
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field class="example-full-width" appearance="standard">
+          <mat-label>Contraseña</mat-label>
+          <input matInput type="password" placeholder="Tu nueva contraseña" formControlName="Contrasena" autocomplete="off">
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Rol</mat-label>
+          <mat-select formControlName="IdRol">
+            <mat-option *ngFor="let lstRoles of listRoles; index as i" [value]="lstRoles.IdRol">{{lstRoles.RolName}}
+            </mat-option>
+          </mat-select>
+          <mat-hint>Rol o cargo en la empresa</mat-hint>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field class="example-full-width" appearance="standard">
+          <mat-label>Nombre</mat-label>
+          <input matInput placeholder="Tu nombre" formControlName="Nombre" autocomplete="off">
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field class="example-full-width" appearance="standard">
+          <mat-label>Cedula</mat-label>
+          <input type="number" matInput placeholder="Tu cedula" formControlName="Cedula" autocomplete="off">
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Ciudad</mat-label>
+          <mat-select formControlName="IdCiudad">
+            <mat-option *ngFor="let lstCiudades of listCiudades; index as i" [value]="lstCiudades.IdCiudad">
+              {{lstCiudades.NombreCiudad}}</mat-option>
+          </mat-select>
+          <mat-hint>Tu ciudad de residencia</mat-hint>
+        </mat-form-field>
+      </p>
+      <p>
+        <!-- <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Concurso</mat-label>
+          <mat-select formControlName="IdConcurso">
+            <mat-option matTooltip="{{lstConcursos.Dias <= 3 ? 'Inscripciones cerradas' : ''}}"
+              matTooltipPosition="after" *ngFor="let lstConcursos of listConcursos; index as i"
+              [value]="lstConcursos.IdConcurso" [disabled]="lstConcursos.Dias <= 3">{{lstConcursos.NombreConcurso}},
+              {{lstConcursos.NombreCiudad}}
+              {{lstConcursos.FechaConcurso}}, Límite {{lstConcursos.LimiteParticipantes}}, Faltan {{lstConcursos.Dias}}
+              dias</mat-option>
+          </mat-select>
+          <mat-hint></mat-hint>
+        </mat-form-field> -->
+      </p>
+      <p>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Sexo</mat-label>
+          <mat-select formControlName="IdSexo">
+            <mat-option *ngFor="let lstSexos of listSexos; index as i" [value]="lstSexos.IdSexo">{{lstSexos.NombreSexo}}
+            </mat-option>
+          </mat-select>
+          <mat-hint></mat-hint>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Fecha de Nacimiento</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="FechaNacimiento" autocomplete="off">
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </p>
+      <br>
+      <button [disabled]="Registration.invalid"
+        type="submit" mat-raised-button color="primary">Registrar</button>
+    </form>
+  </section>
+</div>

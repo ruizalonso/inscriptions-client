@@ -29,3 +29,27 @@ export interface Puntuacion {
   NombreConcurso: string;
   NombreActividad: string;
 }
+
+export interface Concursos {
+  IdConcurso: number;
+  NombreConcurso: string;
+  LimiteParticipantes: number;
+  FechaConcurso: Date;
+  Estado: string;
+  Dias: number;
+}
+
+export interface Logs {
+  FechaRegistro: Date;
+  Descripcion: string;
+  Nombre: string;
+  IdCcms: number;
+  NombreConcurso: string;
+}
+
+export interface Concurso {
+  FechaConcurso: Date;
+  Nombre: string;
+  IdCcms: number;
+  NombreConcurso: string;
+}

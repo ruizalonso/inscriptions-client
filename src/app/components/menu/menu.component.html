@@ -1,0 +1,24 @@
+<mat-toolbar>
+  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button *ngIf="isAdmin" mat-menu-item [routerLink]="['/home/admin']">
+      <mat-icon>dialpad</mat-icon>
+      <span>Admin</span>
+    </button>
+    <button mat-menu-item [routerLink]="['/home/contest']">
+      <mat-icon>list</mat-icon>
+      <span>Concursos</span>
+    </button>
+  </mat-menu>
+  <span></span>
+  <span class="example-spacer"></span>
+  <button (click)="Logout()" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    <mat-icon>exit_to_app</mat-icon>
+  </button>
+</mat-toolbar>
+<section>
+  <router-outlet>
+  </router-outlet>
+</section>
