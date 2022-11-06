@@ -18,7 +18,11 @@ export class LoginComponent implements OnInit {
   @Input() error: string | null | undefined;
 
   @Output() submitEM = new EventEmitter();
-  constructor(private api: ApiService, private toastr: ToastrService, private router:Router) {}
+  constructor(
+    private api: ApiService,
+    private toastr: ToastrService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {}
 
@@ -27,11 +31,15 @@ export class LoginComponent implements OnInit {
       IdCcms: value.IdCcms,
       Contrasena: value.Contrasena,
     };
+
     this.api.request(params, 'auth').subscribe(
       (res: any) => {
-        if(res.body.token){
-          localStorage.setItem('token', res.body.token)
-          this.router.navigate(['contest'])
+        if (res.body.token) {
+          const data = this.api.decryptOrEncrypt(res.body.user, 2);
+          localStorage.setItem('token', res.body.token);
+          localStorage.setItem('user', data);
+
+          this.router.navigate(['home/contest']);
         }
       },
       (err) => {

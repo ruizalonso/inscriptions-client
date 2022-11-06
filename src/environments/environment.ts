@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   api: 'http://localhost:3000',
+  criptKey: '8e5BJa1QRUTmO4ZKg0Yt'
 };
 
 /*

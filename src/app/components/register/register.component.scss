@@ -9,17 +9,11 @@
 }
 .container {
   padding: 12px;
-  .head-container{
-    text-align: center;
-    color: grey;
-    font-weight: 500;
-    margin-top: 1rem;
-  }
   section {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 1rem;
+    margin-top: 2rem;
   }
 }
 .validationMessage {
@@ -30,13 +24,6 @@
 .mat-column-Cedula,
 .mat-column-Puntuacion,
 .mat-column-NombreConcurso,
-
-.mat-column-IdConcurso,
-.mat-column-LimiteParticipantes,
-.mat-column-FechaConcurso,
-.mat-column-Estado,
-.mat-column-Acciones,
-
 .mat-column-NombreActividad {
   padding-right: 24px;
   text-align: center;
