@@ -1,0 +1,24 @@
+<mat-card>
+  <mat-card-title>Login</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="loginForm" (ngSubmit)="Login(loginForm.value)">
+      <p>
+        <mat-form-field>
+          <input type="number" matInput placeholder="Id CCMS" formControlName="IdCcms" autocomplete="off">
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <input type="password" matInput placeholder="Contraseña" formControlName="Contrasena" autocomplete="off">
+        </mat-form-field>
+      </p>
+      <p *ngIf="error" class="error">
+        {{ error }}
+      </p>
+      <div class="button">
+        <button type="submit" mat-button [disabled]="loginForm.invalid">Entrar</button>
+      </div>
+
+    </form>
+  </mat-card-content>
+</mat-card>
