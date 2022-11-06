@@ -9,12 +9,12 @@ import * as CryptoJS from 'crypto-js';
 export class ApiService {
   constructor(private http: HttpClient) {
   }
-
+  //Realiza todos los request con un body y ruta especifica
   request(data: any, request: any) {
     const path = `${environment.api}/${request}`;
     return this.http.post(path, data);
   }
-
+  //Encriptar y desencriptar datos
   decryptOrEncrypt(data: any, option: number) {
     switch (option) {
       case 1:
@@ -32,6 +32,7 @@ export class ApiService {
         break;
     }
   }
+  //Validamos si en la sesión hay o no un usuario administrador o director
   isAdmin(): boolean {
     const user = localStorage.getItem('user');
     const data = this.decryptOrEncrypt(user, 1);
