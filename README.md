@@ -1,5 +1,7 @@
 # IncriptionsClient
 
+Incripciones de colaboradores de una empresa a concursos realizados por esta misma. 
+API Rest desarrollada en Node.js y Cliente desarrollado en Angular 14 con Arquetectura Modelo Vista Controlador. 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.6.
 
 ## Run Locally
